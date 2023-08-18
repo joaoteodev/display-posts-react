@@ -1,7 +1,7 @@
 {
   "name": "posts-react",
   "version": "0.1.0",
-  "homepage": "joaoteodev.github.io/display-posts-react",
+  "homepage": "https://joaoteodev.github.io/display-posts-react",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
