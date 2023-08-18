@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/joaoteodev.github.io/display-posts-react/static/css/main.073c9b0a.css",
+    "main.js": "/joaoteodev.github.io/display-posts-react/static/js/main.46600867.js",
+    "index.html": "/joaoteodev.github.io/display-posts-react/index.html",
+    "main.073c9b0a.css.map": "/joaoteodev.github.io/display-posts-react/static/css/main.073c9b0a.css.map",
+    "main.46600867.js.map": "/joaoteodev.github.io/display-posts-react/static/js/main.46600867.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.46600867.js"
+  ]
+}
