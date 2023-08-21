@@ -1,7 +1,7 @@
 import { Component } from "react";
-import { FaTrash } from "react-icons/fa";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+
 import "./App.css";
+import { PostCard } from "./components/PostCard";
 
 const url = "https://jsonplaceholder.typicode.com/";
 
@@ -58,23 +58,12 @@ export class App extends Component {
       <div className="App">
         <div className="postsList">
           {posts.map(post => (
-            <div key={post.id} className="postCard">
-              <img src={post.image} alt="Post image" className="postImage" />
-
-              <div className="postContent">
-                <h2 className="postTitle">{post.title}</h2>
-                <p>{post.body}</p>
-              </div>
-
-              <div className="actionsCard">
-                <button onClick={() => this.handleLikePost(post)}>
-                  {post?.liked ? <AiFillHeart /> : <AiOutlineHeart />}
-                </button>
-                <button onClick={() => this.deletePost(post)}>
-                  <FaTrash />
-                </button>
-              </div>
-            </div>
+            <PostCard
+              post={post}
+              deletePost={this.deletePost}
+              handleLikePost={this.handleLikePost}
+              key={post.id}
+            />
           ))}
         </div>
       </div>
