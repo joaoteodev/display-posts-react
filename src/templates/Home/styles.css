@@ -2,6 +2,9 @@
   text-align: center;
   padding: 20px;
   padding-bottom: 50px;
+  background-color: #b8b8df;
+  height: 100%;
+  overflow: auto;
 }
 
 .postsList {
