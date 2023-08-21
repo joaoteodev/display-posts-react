@@ -1,38 +1,72 @@
 .App {
   text-align: center;
+  background-color: #8484b3;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.postsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  padding: 20px;
+  gap: 40px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.postCard {
+  position: relative;
+  color: #222222;
+  background: #fff;
+  border-radius: 10px;
+  padding-bottom: 70px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.postCard:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px) scale(1.03);
+}
+
+.postCard .postContent {
+  padding: 30px;
+}
+
+.postCard .postContent .postTitle {
+  margin: 0;
+}
+
+.postImage {
+  max-width: 100%;
+}
+
+.actionsCard {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%);
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 30px;
+}
+
+.actionsCard button {
+  background: #8484b3;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+.actionsCard button svg {
+  fill: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.actionsCard button:hover {
+  transform: scale(1.1);
 }

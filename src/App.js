@@ -1,21 +1,36 @@
-import { useState, Component } from "react";
+import { Component } from "react";
+import { FaTrash } from "react-icons/fa";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import "./App.css";
 
 const url = "https://jsonplaceholder.typicode.com/";
 
 export class App extends Component {
   state = {
-    posts: []
+    posts: [],
+    images: []
   };
 
-  getPosts = async () => {
-    const response = await fetch(url + "posts");
-    const data = await response.json();
-    this.setState({ posts: data });
+  loadPosts = async () => {
+    const postsUrl = url + "posts";
+    const imagesUrl = url + "photos";
+
+    const [postsResponse, imagesResponse] = await Promise.all([
+      fetch(postsUrl),
+      fetch(imagesUrl)
+    ]);
+    const postsContent = await postsResponse.json();
+    const images = await imagesResponse.json();
+
+    const posts = postsContent.map((posts, index) => {
+      return { ...posts, image: images[index].url };
+    });
+
+    this.setState({ posts: posts });
   };
 
   componentDidMount() {
-    this.getPosts();
+    this.loadPosts();
   }
 
   deletePost = post => {
@@ -23,7 +38,8 @@ export class App extends Component {
     this.setState({
       posts: posts.filter(p => p.id !== post.id)
     });
-    console.log(post);
+
+    console.log(this.state.images);
   };
 
   handleLikePost = postLiked => {
@@ -40,30 +56,27 @@ export class App extends Component {
     const { posts } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
+        <div className="postsList">
           {posts.map(post => (
-            <div key={post.id}>
-              <h2>{post.title}</h2>
-              <p>{post.body}</p>
-              <span
-                onClick={() => this.handleLikePost(post)}
-                style={{ cursor: "pointer", userSelect: "none" }}
-              >
-                {post?.liked ? "❤" : "♡"}
-              </span>
-              <span
-                onClick={() => this.deletePost(post)}
-                style={{
-                  cursor: "pointer",
-                  userSelect: "none",
-                  marginLeft: 20
-                }}
-              >
-                🗑
-              </span>
+            <div key={post.id} className="postCard">
+              <img src={post.image} alt="Post image" className="postImage" />
+
+              <div className="postContent">
+                <h2 className="postTitle">{post.title}</h2>
+                <p>{post.body}</p>
+              </div>
+
+              <div className="actionsCard">
+                <button onClick={() => this.handleLikePost(post)}>
+                  {post?.liked ? <AiFillHeart /> : <AiOutlineHeart />}
+                </button>
+                <button onClick={() => this.deletePost(post)}>
+                  <FaTrash />
+                </button>
+              </div>
             </div>
           ))}
-        </header>
+        </div>
       </div>
     );
   }
