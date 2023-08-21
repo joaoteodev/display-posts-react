@@ -1,6 +1,8 @@
 import { FaTrash } from "react-icons/fa";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
+import "./styles.css";
+
 export const PostCard = ({ post, handleLikePost, deletePost }) => {
   return (
     <div className="postCard">

@@ -1,0 +1,29 @@
+.loadMorePosts {
+  padding: 20px;
+  width: 100%;
+  font-size: 20px;
+  border-radius: 15px;
+  border: none;
+  background: #8c6ed4;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loadMorePosts:hover {
+  background: #7357c4;
+}
+
+.loadMorePosts:active {
+  transform: scale(1.01);
+  background: #8362e6;
+}
+
+.loadMorePosts:disabled {
+  cursor: not-allowed;
+  background: #4b4b4b;
+}
+
+.loadMorePosts:disabled:active {
+  transform: none;
+}

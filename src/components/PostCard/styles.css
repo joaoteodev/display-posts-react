@@ -1,24 +1,13 @@
-.App {
-  text-align: center;
-  background-color: #8484b3;
-}
-
-.postsList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  padding: 20px;
-  gap: 40px;
-}
-
 .postCard {
   position: relative;
-  color: #222222;
-  background: #fff;
+  color: #181818;
+  background: #f9f9f9;
   border-radius: 10px;
   padding-bottom: 70px;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  border: 1px solid #222;
 }
 
 .postCard:hover {
@@ -68,5 +57,10 @@
 }
 
 .actionsCard button:hover {
+  background: #7171a5;
+}
+
+.actionsCard button:active {
   transform: scale(1.1);
+  background: #8181c2;
 }

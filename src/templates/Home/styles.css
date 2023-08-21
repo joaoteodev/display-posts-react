@@ -1,0 +1,29 @@
+.App {
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 50px;
+}
+
+.postsList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 40px;
+  position: relative;
+}
+
+.noPosts {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+}
+
+.button-container {
+  margin-top: 50px;
+}
+
+@media (max-width: 400px) {
+  .postsList {
+    grid-template-columns: 1fr;
+  }
+}
