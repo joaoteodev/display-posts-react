@@ -1,11 +1,11 @@
 import "./styles.css";
 
-export const TextInput = ({ handleInput, searchFilter }) => {
+export const TextInput = ({ handleChange, searchFilter }) => {
   return (
     <input
       type="search"
       className="searchPost"
-      onChange={handleInput}
+      onChange={handleChange}
       value={searchFilter}
       placeholder="Type to search..."
     />

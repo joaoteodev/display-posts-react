@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, useEffect, useState } from "react";
 
 import "./styles.css";
 
@@ -87,7 +87,6 @@ export class Home extends Component {
                 deletePost={this.deletePost}
                 handleLikePost={this.handleLikePost}
                 key={post.id}
-                color={this.randomColor}
               />
             ))}
           {filteredPosts.length === 0 && (
@@ -108,3 +107,94 @@ export class Home extends Component {
     );
   }
 }
+
+export const Home2 = () => {
+  const [posts, setPosts] = useState([]);
+  const [allPosts, setAllPosts] = useState([]);
+  const [page, setPage] = useState(0);
+  const [searchFilter, setSearchFilter] = useState("");
+  const [filteredPosts, setFilteredPosts] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
+
+  const postsPerPage = 10;
+
+  const loadAllPosts = async url => {
+    const postsResponse = await loadPosts(url);
+
+    setAllPosts(postsResponse);
+    setPosts(postsResponse.slice(page, postsPerPage));
+    setFilteredPosts(postsResponse.slice(page, postsPerPage));
+  };
+
+  const deletePost = postDeleted => {
+    setPosts(posts.filter(post => post.id !== postDeleted.id));
+  };
+
+  const handleLikePost = postLiked => {
+    setPosts(
+      posts.map(post =>
+        post.id === postLiked.id ? { ...post, liked: !post.liked } : post
+      )
+    );
+  };
+
+  const loadMorePosts = () => {
+    const nextPage = page + postsPerPage;
+    const nextPosts = allPosts.slice(nextPage, nextPage + postsPerPage);
+
+    setPage(nextPage);
+    setPosts([...posts, ...nextPosts]);
+  };
+
+  const handleChange = event => {
+    setSearchFilter(event.target.value);
+  };
+
+  useEffect(() => {
+    if (page + postsPerPage >= allPosts.length) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+
+    setFilteredPosts(
+      posts.filter(post =>
+        post.title.toLowerCase().includes(searchFilter.toLowerCase())
+      )
+    );
+  }, [posts, searchFilter]);
+
+  useEffect(() => {
+    loadAllPosts(url);
+  }, []);
+
+  return (
+    <div className="App">
+      <TextInput handleChange={handleChange} searchFilter={searchFilter} />
+      <div className="postsList">
+        {filteredPosts.length > 0 &&
+          filteredPosts.map(post => (
+            <PostCard
+              post={post}
+              deletePost={deletePost}
+              handleLikePost={handleLikePost}
+              key={post.id}
+            />
+          ))}
+        {filteredPosts.length === 0 && (
+          <p className="noPosts">No posts found...</p>
+        )}
+      </div>
+
+      <div className="button-container">
+        {!searchFilter && (
+          <Button
+            isDisabled={isDisabled}
+            text="Load more posts"
+            loadMorePosts={loadMorePosts}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
